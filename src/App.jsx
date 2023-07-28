@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import "./youtube.css";
-import { Link, Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { Link, Route, Routes, useNavigate, useParams,useLocation } from "react-router-dom";
 
 //https://jonpena.github.io/youtube-clone/search/assets/youtube-icon.png
 /*
@@ -55,12 +55,14 @@ function Header() {
   };
   return (
     <div className="header">
-      <div className="logo">
-        <div className="header-image">
-          <img src="/youtube-icono.png"></img>
+      <Link to="/" style={{ textDecoration: "none" }}>
+        <div className="logo">
+          <div className="header-image">
+            <img src="/youtube-icono.png"></img>
+          </div>
+          <span className="name">videos</span>
         </div>
-        <span className="name">videos</span>
-      </div>
+      </Link>
       <div className="search">
         <input
           type="text"
@@ -437,7 +439,7 @@ function Home() {
                 if (resu.hasOwnProperty("video")) {
                   return (
                     <div className="items" key={ind}>
-                      <Link to={`video/${resu.video.videoId}}`}>
+                      <Link to={`video/${resu.video.videoId}`}>
                         <div className="container-img">
                           <img
                             className="imagen"
@@ -500,17 +502,6 @@ function Home() {
                   );
                 }
 
-                /*return (
-                  <div key={ind}>
-                    <iframe
-                      width="250"
-                      height="150"
-                      src={`https://www.youtube.com/embed/${resu.id.videoId}`}
-                      frameborder="0"
-                    >
-                    </iframe>
-                  </div>
-                );*/
               })}
           </div>
         </div>
@@ -523,24 +514,86 @@ function Videos() {
   /*este componente se usara cada vez que el usuario
    de click a un video localhost:8000/video/idVideo*/
   const { idVideo } = useParams(); //accede a los parametros para manejarlos
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    setLoading(true);
+    fetch(
+      `https://youtube-search-and-download.p.rapidapi.com/video/related?id=${
+        idVideo.slice(0, idVideo.length - 1)
+      }`,
+      options,
+    )
+      .then((e) => e.json())
+      .then((e) => {
+        setLoading(false);
+        setData(e.contents);
+        console.log(e)
+      });
+  }, [idVideo]);
   return (
     <div className="container-videos">
-      <div className="video-right">
-        <iframe
-          width="560"
-          height="315"
-          /*en src . me duelve un id + "}" creo que es error de la api
+      <Header></Header>
+      <div className="content">
+        <div className="video-left">
+          <iframe
+            /*width="50vw"
+            height="70vw"*/
+            /*en src . me duelve un id + "}" creo que es error de la api
             por eso hago un recorte*/
-          src={`https://www.youtube.com/embed/${
-            idVideo.slice(0, idVideo.length - 1)
-          }`}
-          frameborder="0"
-          allowfullscreen
-        >
-        </iframe>
-      </div>
-      <div className="video-left">
+            src={`https://www.youtube.com/embed/${
+              idVideo.slice(0, idVideo.length - 1)
+            }`}
+            frameborder="0"
+            allowfullscreen
+          >
+          </iframe>
+          <p>primero</p>
+        </div>
+        <div className="video-right">
+          {loading ? (
+            <div class="lds-ripple">
+              <div></div>
+              <div></div>
+            </div>
+          ) : data && data.map((resu, ind) => {
+            return (
+              <div className="items" key={ind}>
+                <Link to={`../video/${resu.video.videoId}`}>
+                  <div className="container-img">
+                    <img
+                      className="imagen"
+                      src={resu.video.thumbnails[1].url}
+                      alt=""
+                    />
+                  </div>
+                </Link>
+                <div className="title">
+                  {resu.video.title}
+                </div>
+                <div className="channelTitle">
+                  {resu.video.channelName}
+                  <svg
+                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-14lwgpo"
+                    focusable="false"
+                    aria-hidden="true"
+                    viewBox="0 0 24 24"
+                    data-testid="CheckCircleIcon"
+                    height="15px"
+                    fill="gray"
+                  >
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                    >
+                    </path>
+                  </svg>
+                </div>
+              </div>)
+          })
+          
+          }
+        </div>
       </div>
     </div>
   );
@@ -685,7 +738,7 @@ function Channel() {
     <div className="channel">
       <Header></Header>
       <div className="channelAbout">
-        {loading ? "" :
+        {loading ? "" : (
           <>
             <div className="channel-image">
               <img src={`${data.avatar.thumbnails[0].url}`}></img>
@@ -711,7 +764,7 @@ function Channel() {
               <p>{data.description}</p>
             </div>
           </>
-        }
+        )}
       </div>
       <div className="videos">
         {loading
