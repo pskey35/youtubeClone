@@ -1,6 +1,33 @@
 import { useEffect, useRef, useState } from "react";
 import "./youtube.css";
-import { Link, Route, Routes, useNavigate, useParams,useLocation } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
+/*para este proyecto tambien se puede
+usar props con useLocation() react router dom
+const propsParaPasar = {
+    prop1: 'valor1',
+    prop2: 'valor2',
+  };
+
+  return (
+    <Link
+      to={{
+        pathname: '/ruta',
+        state: { propsParaPasar },
+      }}
+    >
+      Ir a ruta con props
+    </Link>
+  );
+
+  despues puedas usar useLocation() para acceder ala prop state
+*/
 
 //https://jonpena.github.io/youtube-clone/search/assets/youtube-icon.png
 /*
@@ -13,6 +40,8 @@ jayme35371@gmail.com
 games123.DESK
 */
 //cuenta 1
+
+
 const options = {
   method: "GET",
   //en el headers va las keys de la api esto lo saque de rapidApi
@@ -24,14 +53,15 @@ const options = {
 
 //cuenta 2
 //jayme35371@gmail.com
-/*const options = {
+/*
+const options = {
   method: "GET",
   headers: {
     "X-RapidAPI-Key": "7e77b90097msh8b79d681a94027cp13c706jsna21961598a5e",
     "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
   },
-};*/
-
+};
+*/
 function Header() {
   const navigate = useNavigate();
 
@@ -395,8 +425,10 @@ function Home() {
       .then((e) => e.json())
       .then((e) => {
         setData(e.contents);
+        console.log(e);
         // console.log(e.items[0].snippet.channelId);
         setLoading(false);
+        console.log("hola");
       });
   }, [busqueda]);
 
@@ -436,6 +468,8 @@ function Home() {
               )
               : data && data.map((resu, ind) => {
                 console.log(resu);
+                console.log("sssssssssssssssssss");
+
                 if (resu.hasOwnProperty("video")) {
                   return (
                     <div className="items" key={ind}>
@@ -501,7 +535,6 @@ function Home() {
                     </div>
                   );
                 }
-
               })}
           </div>
         </div>
@@ -516,20 +549,46 @@ function Videos() {
   const { idVideo } = useParams(); //accede a los parametros para manejarlos
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
+  const [videoInfo, setVideoInfo] = useState();
+  const [channel,setChannel] = useState()
 
+  //aqui hacer 2 solicitudes al channel  -- avatar subscriptoresCount NombreChannel
+  //videoInfo -- shortDescriptionVideo  NombreTItuloVIdeo vistas autor(nameChannel)
   useEffect(() => {
     setLoading(true);
     fetch(
-      `https://youtube-search-and-download.p.rapidapi.com/video/related?id=${
-        idVideo.slice(0, idVideo.length - 1)
-      }`,
+      `https://youtube-search-and-download.p.rapidapi.com/video/related?id=${idVideo}`,
       options,
     )
       .then((e) => e.json())
       .then((e) => {
         setLoading(false);
         setData(e.contents);
-        console.log(e)
+        console.log(e);
+        //esto es para que el videoRight ocupe lo que sea necesario
+        const videoRight = document.querySelector(
+          "#root > div > div.content > div.video-right",
+        );
+        videoRight.style.minHeight = "initial";
+      });
+
+    fetch(
+      `https://youtube-search-and-download.p.rapidapi.com/video?id=${idVideo}`,
+      options,
+    )
+      .then((e) => e.json())
+      .then((e) => {
+        console.log(e);
+        setVideoInfo(e);
+        console.log("AAAAAAAAAAA");
+        console.log(e.videoDetails.channelId)
+        fetch(`https://youtube-search-and-download.p.rapidapi.com/channel?id=${e.videoDetails.channelId}`,options)
+        .then(e=>e.json())
+        .then(e=>{
+          setChannel(e)
+          console.log("channel")
+          console.log(e)
+        })
       });
   }, [idVideo]);
   return (
@@ -542,57 +601,74 @@ function Videos() {
             height="70vw"*/
             /*en src . me duelve un id + "}" creo que es error de la api
             por eso hago un recorte*/
-            src={`https://www.youtube.com/embed/${
-              idVideo.slice(0, idVideo.length - 1)
-            }`}
+            src={`https://www.youtube.com/embed/${/* idVideo.slice(0, idVideo.length - 1 ya no uso esoxd)*/idVideo}`}
             frameborder="0"
             allowfullscreen
           >
           </iframe>
-          <p>primero</p>
-        </div>
-        <div className="video-right">
-          {loading ? (
-            <div class="lds-ripple">
-              <div></div>
-              <div></div>
+          <div className="texto">
+            <p>{videoInfo && videoInfo.videoDetails.title}</p>
+            <div className="info">
+              <div className="left">
+                <div className="imagenContainer">
+                  <img src={channel && channel.avatar.thumbnails[0].url}></img>
+                </div>
+                <div className="canal">
+                  <p>{channel && channel.title}</p>
+                  <p>{channel && channel.subscriberCountText}</p>
+                </div>
+              </div>
+              <div className="right">
+                {videoInfo && videoInfo.videoDetails.viewCount} views
+              </div>
             </div>
-          ) : data && data.map((resu, ind) => {
-            return (
-              <div className="items" key={ind}>
-                <Link to={`../video/${resu.video.videoId}`}>
-                  <div className="container-img">
-                    <img
-                      className="imagen"
-                      src={resu.video.thumbnails[1].url}
-                      alt=""
-                    />
+         
+          </div>
+        </div>
+
+        <div className="video-right">
+          {loading
+            ? (
+              <div class="lds-ripple">
+                <div></div>
+                <div></div>
+              </div>
+            )
+            : data && data.map((resu, ind) => {
+              return (
+                <div className="items" key={ind}>
+                  <Link to={`../video/${resu.video.videoId}`}>
+                    <div className="container-img">
+                      <img
+                        className="imagen"
+                        src={resu.video.thumbnails[1].url}
+                        alt=""
+                      />
+                    </div>
+                  </Link>
+                  <div className="title">
+                    {resu.video.title}
                   </div>
-                </Link>
-                <div className="title">
-                  {resu.video.title}
-                </div>
-                <div className="channelTitle">
-                  {resu.video.channelName}
-                  <svg
-                    class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-14lwgpo"
-                    focusable="false"
-                    aria-hidden="true"
-                    viewBox="0 0 24 24"
-                    data-testid="CheckCircleIcon"
-                    height="15px"
-                    fill="gray"
-                  >
-                    <path
-                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                  <div className="channelTitle">
+                    {resu.video.channelName}
+                    <svg
+                      class="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-14lwgpo"
+                      focusable="false"
+                      aria-hidden="true"
+                      viewBox="0 0 24 24"
+                      data-testid="CheckCircleIcon"
+                      height="15px"
+                      fill="gray"
                     >
-                    </path>
-                  </svg>
+                      <path
+                        d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"
+                      >
+                      </path>
+                    </svg>
+                  </div>
                 </div>
-              </div>)
-          })
-          
-          }
+              );
+            })}
         </div>
       </div>
     </div>
@@ -640,9 +716,11 @@ function Search() {
               console.log(resu);
             }
             if (resu.hasOwnProperty("video")) {
+              console.log("aaaaaaaaaaa");
+              console.log(resu.video.videoId);
               return (
                 <div className="items" key={ind}>
-                  <Link to={`../video/${resu.video.videoId}}`}>
+                  <Link to={`../video/${resu.video.videoId}`}>
                     <div className="container-img">
                       <img
                         className="imagen"

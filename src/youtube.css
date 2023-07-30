@@ -8,8 +8,6 @@ body,
   overflow: hidden;
 }
 
-
-
 .videos {
   background: gray;
   padding-right: 0px !important;
@@ -182,15 +180,16 @@ body,
   height: 220px;
   overflow: hidden;
   border-radius: 15px;
+  background: rgb(41, 41, 41);
 }
 
 .videos .items .title {
   word-wrap: break-word;
-  padding-left:10px;
+  padding-left: 10px;
 }
 
-.videos .items .channelTitle{
-  padding-left:10px;
+.videos .items .channelTitle {
+  padding-left: 10px;
 }
 
 .videos .items .container-img img {
@@ -340,8 +339,8 @@ body,
     border-radius: 10px;
   }
 
-  .vieos-caja .titulo{
-    font-size:25px;
+  .vieos-caja .titulo {
+    font-size: 25px;
   }
   .videos-caja .videos {
     position: relative;
@@ -392,17 +391,14 @@ body,
 
 .search-content .items .title {
   color: white;
-
 }
 
-
-
-.search-content::-webkit-scrollbar{
-  background:inherit;
+.search-content::-webkit-scrollbar {
+  background: inherit;
 }
 
-.search-content::-webkit-scrollbar-thumb{
-  background:rgb(43, 43, 44);
+.search-content::-webkit-scrollbar-thumb {
+  background: rgb(43, 43, 44);
   border-radius: 10px;
 }
 
@@ -420,7 +416,7 @@ body,
 
   .search .titulo {
     padding-left: 4vw;
-    font-size:30px;
+    font-size: 30px;
   }
 
   .item-search {
@@ -519,11 +515,10 @@ body,
 }
 
 @media screen and (max-width: 470px) {
-  
-.channelAbout .channel-texto p:nth-child(3) {
-  padding:0;
-  max-width:270px;
-}
+  .channelAbout .channel-texto p:nth-child(3) {
+    padding: 0;
+    max-width: 270px;
+  }
 
   .channel .videos {
     width: 100%;
@@ -537,43 +532,37 @@ body,
   }
 }
 
-
-
-
-
-
 /*---------------PAGE VIDEO-------------------------*/
-.container-videos{
-  height:100vh;
-  width:100vw;
+.container-videos {
+  height: 100vh;
+  width: 100vw;
 }
 
-.container-videos .content{
-  height:calc(100vh - 70px);
-  display:flex;
+.container-videos .content {
+  height: calc(100vh - 70px);
+  display: flex;
 }
 
-.container-videos .content .video-left{
-  width:75%;
-  height:100%;
+.container-videos .content .video-left {
+  width: 75%;
+  height: 100%;
+  min-height:50%;
 }
 
-.container-videos .content .video-left iframe{
-  width:100%;
-  height:80%;
+.container-videos .content .video-left iframe {
+  width: 100%;
+  height: 90%;
   /*min-width:870px;*/
 }
 
-
-
-.container-videos .content .video-right{
-  width:30%;
-  overflow-y:auto;
-  min-width:360px;
+.container-videos .content .video-right {
+  width: 30%;
+  overflow-y: auto;
+  min-width: 360px;
 }
 
-.video-right{
-  position:relative;
+.video-right {
+  position: relative;
   background: rgb(24, 23, 23);
 }
 
@@ -583,78 +572,120 @@ body,
 
 .video-right::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  background:rgb(82, 82, 82);
+  background: rgb(82, 82, 82);
 }
 
-
-.container-img{
-  display:grid;
+.container-img {
+  display: grid;
   place-items: center;
-}
-
-.video-right .items{
-  display:flex;
-  flex-direction: column;
-  justify-content: center;
-  margin:20px 0 ;
-}
-
-.video-right .container-img .imagen{
-  border-radius:15px;
+  height:213px;
+  background:rgb(43, 42, 42);
+  border-radius:10px;
   width:100%;
 }
 
-.video-right .items .title{
+.video-right .items {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.video-right .container-img .imagen {
+  border-radius: 15px;
+  width: 100%;
+  height:100%;
+}
+
+.video-right .items .title {
   /*aqui puse 15vw por que es la mitad de 30%
   que tiene el videoRight y menos 380 por que es
   casi el tamaño de la imagen divido entre dos
   para empezar de la mitad*/
-  padding-left:calc(15vw - (380px / 2));
-  color:gray
+  /*padding-left: calc(15vw - (380px / 2));*/
+  /*con poner 1vw basta xd*/
+  padding-left:1vw;
+  color: gray;
 }
 
-.video-right .items .channelTitle{
-  padding-left:calc(15vw - (380px / 2));
-  color:white;
-
+.video-right .items .channelTitle {
+  padding-left:1vw;
+  color: white;
 }
 
-@media screen and (max-width:950px){
- .content{
-  flex-direction: column;
- }
 
-  .content .video-left{
-    background:red;
+.content .video-left .texto .info{
+  display:flex;
+  justify-content: space-between;
+}
+
+.video-left .texto .info .left {
+  display:flex;
+}
+
+.video-left .texto .info .left .imagenContainer{
+  height:30px;
+  width:30px;
+  background:gray;
+  border-radius:50%;
+}
+
+.video-left .texto .info .left .imagenContainer img{
+  width:100%;
+  height:100%;
+  border-radius:50%;
+}
+
+
+@media screen and (max-width: 950px) {
+  .content {
+    flex-direction: column;
+    overflow: auto;
   }
 
-  .container-videos .content{
-  
+  .container-videos .content {
+    display: flex;
+    flex-direction: column;
   }
 
-  .container-videos .content .video-right{
-    width:100%;
+  .container-videos .content .video-left {
+    width: 100%;
+    min-height: 53%;
+    position:relative;
+    max-height:60%;
+  }
+
+  .container-videos .content .video-right {
+    width: 100%;
     position: relative;
-    height: calc(100% - 47px); /*-47 por que es lo que midel el header*/
+    min-height:50%;
+    /*min-height: calc(0% - 47px);*/ /*-47 por que es lo que midel el header*/
+    /*quite el height calc porque los ".items" se desbordaban de su padre ".video-right"*/
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(150px, 380px));
-    overflow-y: auto;
     justify-content: center;
     grid-gap: 10px;
     padding: 50px 0;
+    overflow: initial;
   }
 
-  .container-videos .content .video-left{
-    width:100%;
-    height:100%;
-  }
+   .container-videos .content .video-left iframe{
+    height:calc(50% - 70px);
+    position:fixed;
+    z-index:10;
+   }
+   
+   .content .video-left .texto{
+    position:absolute;
+    bottom:0;
+   }
 }
 
 
 
-@media screen and (max-width: 450px){
-  .container-videos .content{
-    height:calc(100vh - 50px);
+@media screen and (max-width: 450px) {
+  .container-videos .content {
+    height: calc(100vh - 50px);
   }
   .container-videos .content .video-right {
     position: relative;
@@ -662,11 +693,11 @@ body,
     grid-template-columns: repeat(auto-fill, minmax(150px, 100%));
   }
 
-  .video-right .items .title{
-    padding-left:10px;
+  .video-right .items .title {
+    padding-left: 10px;
   }
 
-  .video-right .items .channelTitle{
-    padding-left:10px;
+  .video-right .items .channelTitle {
+    padding-left: 10px;
   }
 }
