@@ -40,8 +40,7 @@ jayme35371@gmail.com
 games123.DESK
 */
 //cuenta 1
-
-
+/*
 const options = {
   method: "GET",
   //en el headers va las keys de la api esto lo saque de rapidApi
@@ -50,10 +49,11 @@ const options = {
     "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
   },
 };
+*/
 
 //cuenta 2
 //jayme35371@gmail.com
-/*
+
 const options = {
   method: "GET",
   headers: {
@@ -61,7 +61,7 @@ const options = {
     "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
   },
 };
-*/
+
 function Header() {
   const navigate = useNavigate();
 
@@ -550,7 +550,7 @@ function Videos() {
   const [data, setData] = useState();
   const [loading, setLoading] = useState(true);
   const [videoInfo, setVideoInfo] = useState();
-  const [channel,setChannel] = useState()
+  const [channel, setChannel] = useState();
 
   //aqui hacer 2 solicitudes al channel  -- avatar subscriptoresCount NombreChannel
   //videoInfo -- shortDescriptionVideo  NombreTItuloVIdeo vistas autor(nameChannel)
@@ -581,14 +581,18 @@ function Videos() {
         console.log(e);
         setVideoInfo(e);
         console.log("AAAAAAAAAAA");
-        console.log(e.videoDetails.channelId)
-        fetch(`https://youtube-search-and-download.p.rapidapi.com/channel?id=${e.videoDetails.channelId}`,options)
-        .then(e=>e.json())
-        .then(e=>{
-          setChannel(e)
-          console.log("channel")
-          console.log(e)
-        })
+        console.log(e.videoDetails.channelId);
+        //videoInfo.videoDetails.channelId
+        fetch(
+          `https://youtube-search-and-download.p.rapidapi.com/channel?id=${e.videoDetails.channelId}`,
+          options,
+        )
+          .then((e) => e.json())
+          .then((e) => {
+            setChannel(e);
+            console.log("channel");
+            console.log(e);
+          });
       });
   }, [idVideo]);
   return (
@@ -601,7 +605,7 @@ function Videos() {
             height="70vw"*/
             /*en src . me duelve un id + "}" creo que es error de la api
             por eso hago un recorte*/
-            src={`https://www.youtube.com/embed/${/* idVideo.slice(0, idVideo.length - 1 ya no uso esoxd)*/idVideo}`}
+            src={`https://www.youtube.com/embed/${/* idVideo.slice(0, idVideo.length - 1 ya no uso esoxd)*/ idVideo}`}
             frameborder="0"
             allowfullscreen
           >
@@ -609,20 +613,22 @@ function Videos() {
           <div className="texto">
             <p>{videoInfo && videoInfo.videoDetails.title}</p>
             <div className="info">
-              <div className="left">
-                <div className="imagenContainer">
-                  <img src={channel && channel.avatar.thumbnails[0].url}></img>
+              <Link to={`/channel/${videoInfo && videoInfo.videoDetails.channelId}`} style={{textDecoration:"none"}}>
+                <div className="left" >
+                  <div className="imagenContainer">
+                    <img src={channel && channel.avatar.thumbnails[0].url}>
+                    </img>
+                  </div>
+                  <div className="canal">
+                    <p>{channel && channel.title}</p>
+                    <p>{channel && channel.subscriberCountText}</p>
+                  </div>
                 </div>
-                <div className="canal">
-                  <p>{channel && channel.title}</p>
-                  <p>{channel && channel.subscriberCountText}</p>
-                </div>
-              </div>
+              </Link>
               <div className="right">
                 {videoInfo && videoInfo.videoDetails.viewCount} views
               </div>
             </div>
-         
           </div>
         </div>
 
