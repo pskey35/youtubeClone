@@ -54,11 +54,14 @@ const options = {
 //cuenta 2
 //jayme35371@gmail.com
 
+const url = import.meta.env.VITE_url
+const key = import.meta.env.VITE_key
+console.log(url)
 const options = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "7e77b90097msh8b79d681a94027cp13c706jsna21961598a5e",
-    "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
+    "X-RapidAPI-Key": key,
+    "X-RapidAPI-Host": url,
   },
 };
 
@@ -419,7 +422,7 @@ function Home() {
     //const iconoNoticia = document.querySelector("#select-0").click()
     setLoading(true);
     fetch(
-      `https://youtube-search-and-download.p.rapidapi.com/search?query=${busqueda}`,
+      `https://${url}/search?query=${busqueda}`,
       options,
     )
       .then((e) => e.json())
@@ -557,7 +560,7 @@ function Videos() {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `https://youtube-search-and-download.p.rapidapi.com/video/related?id=${idVideo}`,
+      `https://${url}/video/related?id=${idVideo}`,
       options,
     )
       .then((e) => e.json())
@@ -573,7 +576,7 @@ function Videos() {
       });
 
     fetch(
-      `https://youtube-search-and-download.p.rapidapi.com/video?id=${idVideo}`,
+      `https://${url}/video?id=${idVideo}`,
       options,
     )
       .then((e) => e.json())
@@ -584,7 +587,7 @@ function Videos() {
         console.log(e.videoDetails.channelId);
         //videoInfo.videoDetails.channelId
         fetch(
-          `https://youtube-search-and-download.p.rapidapi.com/channel?id=${e.videoDetails.channelId}`,
+          `https://${url}/channel?id=${e.videoDetails.channelId}`,
           options,
         )
           .then((e) => e.json())
@@ -689,7 +692,7 @@ function Search() {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `https://youtube-search-and-download.p.rapidapi.com/search?query=${parametro}`,
+      `https://${url}/search?query=${parametro}`,
       options,
     )
       .then((e) => e.json())
@@ -807,7 +810,7 @@ function Channel() {
   useEffect(() => {
     setLoading(true);
     fetch(
-      `https://youtube-search-and-download.p.rapidapi.com/channel?id=${idChannel}`,
+      `https://${url}/channel?id=${idChannel}`,
       options,
     )
       .then((e) => e.json())
