@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./youtube.scss";
+import "./App.scss";
 import {
   Link,
   Route,
@@ -7,56 +7,6 @@ import {
   useParams,
 } from "react-router-dom";
 import Header from "./components/header.jsx"
-
-/*para este proyecto tambien se puede
-usar props con useLocation() react router dom
-const propsParaPasar = {
-    prop1: 'valor1',
-    prop2: 'valor2',
-  };
-
-  return (
-    <Link
-      to={{
-        pathname: '/ruta',
-        state: { propsParaPasar },
-      }}
-    >
-      Ir a ruta con props
-    </Link>
-  );
-
-  despues puedas usar useLocation() para acceder ala prop state
-*/
-
-//https://jonpena.github.io/youtube-clone/search/assets/youtube-icon.png
-/*
-api usado en este proyecto:
-https://rapidapi.com/h0p3rwe/api/youtube-search-and-download
-*/
-
-/*
-jayme35371@gmail.com
-games123.DESK
-*/
-//cuenta 1
-/*
-const options = {
-  method: "GET",
-  //en el headers va las keys de la api esto lo saque de rapidApi
-  headers: {
-    "X-RapidAPI-Key": "3424201bdfmshb8f2ea7923a3ddap1bff7cjsn84f4c9b23ca1",
-    "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
-  },
-};
-*/
-
-//cuenta 2
-//jayme35371@gmail.com
-
-/*--pueden usar mi api key es totalmente gratis he aqui la razon por la cual 
-no veo la necesidad de usar una variable de entorno convencional
---*/
 
 const __apiKey = "7e77b90097msh8b79d681a94027cp13c706jsna21961598a5e"
 const __host = "youtube-search-and-download.p.rapidapi.com"

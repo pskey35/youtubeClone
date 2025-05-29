@@ -5,6 +5,10 @@
   align-items: center;
   padding: 10px 60px;
   color: white;
+
+  @media (max-width:768px) {
+    padding:10PX 10px 20px 10PX;
+  }
 }
 
 .header .logo {
@@ -21,6 +25,14 @@
 .header .logo .header-image {
   height: 50px;
   width: 50px;
+
+
+  @media (max-width:450px) {
+    .header .header-image {
+      margin-left: 0px;
+    }
+  }
+
 }
 
 .header .logo .header-image img {
@@ -32,14 +44,17 @@
   display: flex;
   border-radius: 15px;
   overflow: hidden;
-  border: 1px solid rgb(158, 153, 153);
+  align-items: center;
+  border: 2px solid rgb(51, 51, 51);
+  height: 45px;
 }
 
 .header .search .input {
   padding: 5px 20px;
   border: none;
-  background: rgba(151, 151, 151, 0.068);
+  background: rgba(0, 0, 0, 0.548);
   color: white;
+  height:100%;
 }
 
 .header .search .input::placeholder {
@@ -50,6 +65,8 @@
   width: 50px;
   height: 30px;
   background: rgb(73, 73, 73);
+  height:100%;
+  padding:5px 0 5px 0;
 }
 
 .header .lupa svg {
@@ -65,15 +82,7 @@
     display: none;
   }
 
-  .header .header-image {
-    margin-left: 20px;
-  }
+
 }
 
 
-@media screen and (max-width: 450px) {
-  .header {
-    padding: 0;
-  }
-  
-}
