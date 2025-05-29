@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import "./youtube.css";
+import "./youtube.scss";
 import {
   Link,
   Route,
