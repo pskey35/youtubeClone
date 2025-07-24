@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+.new-home_videos {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 380px));
+    overflow-y: auto;
+    justify-content: center;
+    grid-gap: 2.5em;
+    padding: 70px 0;
+
+    @media (max-width:450px) {
+        grid-template-columns: repeat(auto-fill, minmax(100%, 100%));
+        gap: 3em;
+    }
+
+
+
+
+
+}
+
+.new-itemVideo {
+    .title {
+        font-size: 1.1em;
+        color: #fff;
+        font-family: "Open Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
+    }
+
+    .channelTitle {
+        font-size: .9em;
+        color: #fff;
+        font-family: "Open Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
+    }
+
+}
+
+
+.new-containerChannel {
+    a {
+        .imageChannel {
+            outline: 7px solid #a50000ab
+        }
+    }
+    .new-channelTitle {
+        display: flex;
+        align-items: center;
+        font-size: 1.2em;
+        color: #fff;
+        margin-top: 10px;
+        margin-left: 15px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-family: "Open Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 700;
+        font-style: normal;
+        font-variation-settings:
+            "wdth" 100;
+
+
+        span {
+            width: 1em;
+            height: 1em;
+
+            svg {
+
+                color: rgb(118, 118, 255);
+                /* Adjust the color as needed */
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+    }
+}

@@ -5,6 +5,8 @@ function VideoList({ searchData }) {
     return (
         <div className="search-content videos">
             {searchData.map((resu, ind) => {
+                console.log("......")
+                console.log(resu)
                 if (resu.hasOwnProperty("video")) {
                     return (
                         <div className="items" key={ind}>

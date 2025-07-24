@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../components/header/header.jsx";
 import NavBar from "./NavBar";
-import VideoList from "./VideoList";
+import VideoList from "./videoList/VideoList.jsx";
 import LoadingSpinner from "./LoadingSpinner";
 import TitleSection from "./TitleSection";
 import "./assets/page.scss";

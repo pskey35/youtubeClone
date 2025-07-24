@@ -8,7 +8,7 @@ import LoadingSpinner from "./LoadingSpinner";
 const options = {
   method: "GET",
   headers: {
-    "X-RapidAPI-Key": "YOUR_RAPIDAPI_KEY",
+    "X-RapidAPI-Key": "3424201bdfmshb8f2ea7923a3ddap1bff7cjsn84f4c9b23ca1",
     "X-RapidAPI-Host": "youtube-search-and-download.p.rapidapi.com",
   },
 };
@@ -26,6 +26,8 @@ export default function Search() {
     )
       .then((e) => e.json())
       .then((e) => {
+        console.log("Search Results:");
+        console.log(e)
         setSearchData(e.contents);
         setLoading(false);
       });
