@@ -5,7 +5,7 @@ import NavBar from "./NavBar";
 import VideoList from "./VideoList";
 import LoadingSpinner from "./LoadingSpinner";
 import TitleSection from "./TitleSection";
-
+import "./assets/page.scss";
 
 
 //estos son los iconos mas su nombre, es el NAV
@@ -312,7 +312,7 @@ export default function Home({ options }) {
             <Header />
             <div className="container">
                 <NavBar objeto={objeto} selected={selected} />
-                <div className="videos-caja">
+                <div className="videos-caja new-home_content">
                     <TitleSection busqueda={busqueda} />
                     {loading ? <LoadingSpinner /> : <VideoList data={data} />}
                 </div>

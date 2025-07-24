@@ -1,21 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./assets/videoList.scss";
+
+
+
+function ItemVideo({ resu }) {
+    return (
+
+        <div className="container-img new-cajaItem">
+            <img
+                className="imagen"
+                src={resu.video.thumbnails[0].url}
+                alt="Video Thumbnail"
+            />
+        </div>
+    )
+}
+
+
+
 
 function VideoList({ data }) {
     return (
-        <div className="videos">
+        <div className="videos new-home_videos">
             {data.map((resu, ind) => {
                 if (resu.hasOwnProperty("video")) {
                     return (
                         <div className="items" key={ind}>
                             <Link to={`video/${resu.video.videoId}`}>
-                                <div className="container-img">
-                                    <img
-                                        className="imagen"
-                                        src={resu.video.thumbnails[0].url}
-                                        alt="Video Thumbnail"
-                                    />
-                                </div>
+                                <ItemVideo resu={resu} />
                             </Link>
                             <div className="title">
                                 {resu.video.title}
