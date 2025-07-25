@@ -590,7 +590,6 @@ body,
 }
 
 .video-left .texto .info .left .canal{
-  padding-left:10px;
 }
 
 
@@ -606,10 +605,10 @@ body,
 }
 
 @media screen and (max-width: 950px) {
-  .content {
+  /*.content {
     flex-direction: column;
     overflow: auto;
-  }
+  }*/
 
   .container-videos{
     position:relative;
@@ -644,11 +643,11 @@ body,
     position:fixed;
     z-index:10;
    }
-   
+   /*
    .content .video-left .texto{
     position:absolute;
     top:50%;
-   }
+   }*/
 }
 
 

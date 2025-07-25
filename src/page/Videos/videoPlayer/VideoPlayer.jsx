@@ -1,15 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
 
+import { Link } from "react-router-dom";
+import "./videoPlayer.scss"
 function VideoPlayer({ idVideo, videoInfo, channel }) {
     return (
         <div className="video-left">
-            <iframe
-                src={`https://www.youtube.com/embed/${idVideo}`}
-                frameBorder="0"
-                allowFullScreen
-            ></iframe>
-            <div className="texto">
+            <div className="new-iframeContainer">
+                <iframe
+                    src={`https://www.youtube.com/embed/${idVideo}`}
+                    frameBorder="0"
+                    allowFullScreen
+                ></iframe>
+            </div>
+
+            <div className="texto new-textoContainer">
                 <p>{videoInfo && videoInfo.videoDetails.title}</p>
                 <div className="info">
                     <Link

@@ -33,7 +33,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home options={options}></Home>}></Route>
         {/*el ":idVideo" y ":parametro" se maneja con el useParams() de react-router-dom*/}
-        <Route path="video/:idVideo" element={<Videos></Videos>}></Route>
+        <Route path="video/:idVideo" element={<Videos options={options}></Videos>}></Route>
         <Route path="search/:parametro" element={<Search></Search>}></Route>
         <Route path="channel/:idChannel" element={<Channel options={options}></Channel>}></Route>
       </Routes>

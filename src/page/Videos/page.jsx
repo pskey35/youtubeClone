@@ -1,53 +1,26 @@
-import { useState, useEffect } from "react";
+
 import { useParams } from "react-router-dom";
 import Header from "../../components/header/header.jsx";
-import VideoPlayer from "./VideoPlayer";
+import VideoPlayer from "./videoPlayer/VideoPlayer.jsx";
 import VideoList from "./VideoList";
 import LoadingSpinner from "./LoadingSpinner";
+import useVideos from "./useVideos.jsx";
+import { useEffect } from "react";
 
-export default function Videos() {
+
+
+
+export default function Videos({ options }) {
     const { idVideo } = useParams();
-    const [data, setData] = useState();
-    const [loading, setLoading] = useState(true);
-    const [videoInfo, setVideoInfo] = useState();
-    const [channel, setChannel] = useState();
-
-    useEffect(() => {
-        setLoading(true);
-        fetch(
-            `https://youtube-search-and-download.p.rapidapi.com/video/related?id=${idVideo}`,
-            options,
-        )
-            .then((e) => e.json())
-            .then((e) => {
-                setLoading(false);
-                setData(e.contents);
-            });
-
-        fetch(
-            `https://youtube-search-and-download.p.rapidapi.com/video?id=${idVideo}`,
-            options,
-        )
-            .then((e) => e.json())
-            .then((e) => {
-                setVideoInfo(e);
-                fetch(
-                    `https://youtube-search-and-download.p.rapidapi.com/channel?id=${e.videoDetails.channelId}`,
-                    options,
-                )
-                    .then((e) => e.json())
-                    .then((e) => {
-                        setChannel(e);
-                    });
-            });
-    }, [idVideo]);
-
+    const { data, loading, videoInfo, channel } = useVideos(options);
+  
     return (
         <div className="container-videos">
             <Header />
-            <div className="content">
+            <div className="content new-content_videos">
                 <VideoPlayer idVideo={idVideo} videoInfo={videoInfo} channel={channel} />
                 {loading ? <LoadingSpinner /> : <VideoList data={data} />}
+             
             </div>
         </div>
     );

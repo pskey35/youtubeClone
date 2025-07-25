@@ -1,0 +1,31 @@
+.video-left{
+    display:flex;
+    flex-direction:column;
+    padding:2em;
+    width:100%;
+    height:100%;
+
+    .new-iframeContainer{
+        width:100%;
+        height:100%;
+        position:relative;
+        margin-bottom:1em;
+
+        iframe{
+            width:100%;
+            height:100%;
+        }
+    }
+
+}
+
+
+.new-textoContainer{
+    
+
+
+    .imageContainer{
+        overflow:hidden;
+    }
+}
+

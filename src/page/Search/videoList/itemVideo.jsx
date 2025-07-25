@@ -1,15 +1,14 @@
+import { Link } from "react-router-dom"
 
-import { Link } from "react-router-dom";
-
-
-function ItemVideos({ resu, ind }) {
+export default function ItemVideo({ resu, ind }) {
     return (
+
         <div className="items" key={ind}>
             <Link to={`../video/${resu.video.videoId}`}>
                 <div className="container-img">
                     <img
                         className="imagen"
-                        src={resu.video.thumbnails[1].url}
+                        src={resu.video.thumbnails[0].url}
                         alt="Video Thumbnail"
                     />
                 </div>
@@ -36,16 +35,3 @@ function ItemVideos({ resu, ind }) {
         </div>
     )
 }
-
-
-function VideoList({ data }) {
-    return (
-        <div className="video-right">
-            {data.map((resu, ind) => (
-               <ItemVideos resu={resu} ind={ind} />
-            ))}
-        </div>
-    );
-}
-
-export default VideoList;
