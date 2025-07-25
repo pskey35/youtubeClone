@@ -7,7 +7,7 @@ import Videos from "./page/Videos/page.jsx";
 import Search from "./page/Search/page.jsx";
 import Channel from "./page/Channel/page.jsx";
 import "./App.scss";
-
+import "./new-App.scss";
 
 const __apiKey = "7e77b90097msh8b79d681a94027cp13c706jsna21961598a5e"
 const __host = "youtube-search-and-download.p.rapidapi.com"

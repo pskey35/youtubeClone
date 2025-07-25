@@ -1,0 +1,71 @@
+.new-nav {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width:300px;
+
+
+    @media (max-width: 768px) {
+        width: 100%;
+        overflow-x:auto;
+        flex-direction: row;
+        padding-left:4em;
+        height:500px;
+    }
+}
+
+
+
+//este es todo el rectangulo de la barra de navegacion UNIDAD
+.new-nav__item {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+    gap: 1em;
+    border-radius: .7em;
+    padding: 1em 3em;
+    transition: all 100ms ease;
+   
+
+    &:hover {
+        background-color: #ff898970;
+    }
+
+    @media (max-width: 768px) {
+        width:100%;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        flex:1;
+        min-width: 250px;
+        padding:.1em 1em;
+    }
+
+
+
+
+
+    //este solo es un icono dentro del rectangulo de la barra de navegacion
+    .new-nav__icon {
+        width: 24px;
+        height: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+
+    .new-nav__name {
+        font-size: 14px;
+        
+    }
+}

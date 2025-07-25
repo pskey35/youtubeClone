@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../components/header/header.jsx";
-import NavBar from "./NavBar";
+import NavBar from "./navbar/NavBar.jsx";
 import VideoList from "./videoList/VideoList.jsx";
 import LoadingSpinner from "./LoadingSpinner";
 import TitleSection from "./TitleSection";
@@ -277,46 +277,52 @@ const objeto = [
 
 
 export default function Home({ options }) {
-    const [busqueda, setBusqueda] = useState("noticias");
-    const [data, setData] = useState();
-    const [loading, setLoading] = useState(true);
+  const [busqueda, setBusqueda] = useState("noticias");
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
 
-    const selected = (id, nombre) => {
-        const nav = document.querySelector(".nav");
-        for (let i = 0; i < nav.children.length; i++) {
-            nav.children[i].style.background = "inherit";
-            nav.children[i].style.fill = "red";
-        }
-        const x = document.querySelector(`#select-${id}`);
-        x.style.background = "red";
-        x.style.fill = "white";
+  const selected = (id, nombre) => {
+    const nav = document.querySelector(".nav");
+    for (let i = 0; i < nav.children.length; i++) {
+      nav.children[i].style.background = "inherit";
+      nav.children[i].style.fill = "red";
+    }
+    const x = document.querySelector(`#select-${id}`);
+    x.style.background = "red";
+    x.style.fill = "white";
 
-        setBusqueda(nombre);
-    };
+    setBusqueda(nombre);
+  };
 
-    useEffect(() => {
-        setLoading(true);
-        fetch(
-            `https://youtube-search-and-download.p.rapidapi.com/search?query=${busqueda}`,
-            options,
-        )
-            .then((e) => e.json())
-            .then((e) => {
-                setData(e.contents);
-                setLoading(false);
-            });
-    }, [busqueda]);
+  useEffect(() => {
+    setLoading(true);
+    fetch(
+      `https://youtube-search-and-download.p.rapidapi.com/search?query=${busqueda}`,
+      options,
+    )
+      .then((e) => e.json())
+      .then((e) => {
+        setData(e.contents);
+        setLoading(false);
+      });
+  }, [busqueda]);
 
-    return (
-        <div className="ventana">
-            <Header />
-            <div className="container">
-                <NavBar objeto={objeto} selected={selected} />
-                <div className="videos-caja new-home_content">
-                    <TitleSection busqueda={busqueda} />
-                    {loading ? <LoadingSpinner /> : <VideoList data={data} />}
-                </div>
-            </div>
+  return (
+    <div className="ventana">
+      <Header />
+      <div className="container">
+             <NavBar />
+        {    /* <NavBar objeto={objeto} selected={selected} />*/}
+
+        <div className="videos-caja new-home_content">
+          
+            {    /* <TitleSection busqueda={busqueda} />*/}
+          {loading ? <LoadingSpinner /> : <VideoList data={data} />}
         </div>
-    );
+
+      
+      </div>
+   
+    </div>
+  );
 }
